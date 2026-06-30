@@ -336,7 +336,7 @@ const getNextRandom = (curr, length) => {
   return next;
 };
 
-// ── מאמן הסייבר / כדורגל: פידבקים מותאמים ───────────────────────────────────
+// ── מאמן האנגלית של יובל: פידבקים מותאמים ───────────────────────────────────
 const getCoachFeedback = (type, details = "") => {
   const successList = [
     "גוווווול! ביצוע מושלם! לחיבורים! ⚽",
@@ -556,7 +556,7 @@ export default function App() {
   const [wrongHalfIds, setWrongHalfIds] = useState([]); // לשמירת כרטיסים אדומים בטעות
 
   // חוקי קריאה (Phonics)
-  const [phonicsRuleIdx, setPhonicsRuleIdx] = useState(0);
+  const [phonicsRuleIdx, setPhonicsRuleIdx] = useState(null); // מתחיל כ-null כדי להראות את רשימת הכרטיסיות
   const [phonicsWordIdx, setPhonicsWordIdx] = useState(0);
   const [phonicsFeedback, setPhonicsFeedback] = useState(null);
   const [phonicsListening, setPhonicsListening] = useState(false);
@@ -600,7 +600,7 @@ export default function App() {
       const msgs = { 'no-speech': 'לא שמעתי, כנס למגרש ונסה שוב! 🎤', 'not-allowed': 'יש לאשר גישה למיקרופון בדפדפן.' };
       setFeedback({ type: 'error', message: msgs[e.error] || 'שגיאת מיקרופון, נסה שוב.' });
       setCoachMsg(getCoachFeedback('error', "(לא נקלט קול)"));
-      setTimeout(() => setFeedback(null), 2500);
+      setTimeout(() => setFeedback(null), 2505);
     };
 
     rec.onresult = e => {
@@ -894,11 +894,11 @@ export default function App() {
         const translation = parts[1];
         const pron = parts[2];
         return (
-          <span key={i} className="relative inline-block group font-bold text-cyan-400 border-b border-dashed border-cyan-400 hover:text-cyan-300 cursor-pointer px-1">
+          <span key={i} className="relative inline-block group font-bold text-sky-450 border-b border-dashed border-sky-400 hover:text-sky-350 cursor-pointer px-1">
             {word}
             {/* Tooltip */}
-            <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 bg-slate-955 text-slate-200 border border-slate-700 text-xs rounded-xl p-2.5 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-300 shadow-2xl z-50 flex flex-col items-center gap-0.5">
-              <span className="text-cyan-400 font-extrabold text-sm text-center">{translation}</span>
+            <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 bg-slate-900 border border-slate-700 text-slate-200 text-xs rounded-xl p-2.5 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-300 shadow-2xl z-50 flex flex-col items-center gap-0.5">
+              <span className="text-sky-300 font-extrabold text-sm text-center">{translation}</span>
               <span className="text-slate-400 text-[10px] text-center" dir="rtl">הגייה: {pron}</span>
             </span>
           </span>
@@ -919,15 +919,15 @@ export default function App() {
     <button onClick={() => { if (action) action(); else setView(id); }}
       className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition-all border border-transparent shadow-md hover:scale-105 active:scale-95
         ${view === id || (view.startsWith('quiz') && id === 'quiz')
-          ? 'bg-cyan-600 text-white shadow-[0_0_15px_rgba(6,182,212,0.4)] border-cyan-500'
-          : 'bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-cyan-400 border-slate-700'}`}>
+          ? 'bg-sky-600 text-white border-sky-500'
+          : 'bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-sky-300 border-slate-700'}`}>
       <span className="text-sm sm:text-base">{icon}</span>
       <span>{label}</span>
     </button>
   );
 
   return (
-    <div className="min-h-screen bg-slate-955 text-slate-105 p-4 md:p-6 font-sans select-none" dir="rtl">
+    <div className="min-h-screen bg-slate-900 text-slate-100 p-4 md:p-6 font-sans select-none" dir="rtl">
       <div className="max-w-5xl mx-auto space-y-6">
 
         {/* Lottie Overlays */}
@@ -943,11 +943,11 @@ export default function App() {
         )}
 
         {/* Header & Title */}
-        <header className="flex flex-col md:flex-row justify-between items-center bg-slate-900 border border-slate-800 rounded-3xl p-5 md:p-6 shadow-xl gap-4">
+        <header className="flex flex-col md:flex-row justify-between items-center bg-slate-800 border border-slate-700 rounded-3xl p-5 md:p-6 shadow-xl gap-4">
           <div className="text-right">
-            <h1 className="text-3xl md:text-4xl font-black text-cyan-400 drop-shadow-[0_0_10px_rgba(34,211,238,0.2)] flex items-center gap-2">
+            <h1 className="text-3xl md:text-4xl font-black text-sky-400 flex items-center gap-2">
               <span>English Zone</span>
-              <span className="text-lg bg-cyan-900/40 text-cyan-400 border border-cyan-800/60 px-3 py-1 rounded-full font-bold">יובל – כיתה ח' ⚽</span>
+              <span className="text-lg bg-sky-950/40 text-sky-400 border border-sky-850 px-3 py-1 rounded-full font-bold">יובל – כיתה ח' ⚽</span>
             </h1>
             <p className="text-slate-400 text-xs mt-1">מערכת תרגול אינטראקטיבית משולבת כדורגל וגיימינג</p>
           </div>
@@ -955,53 +955,53 @@ export default function App() {
           <div className="flex flex-wrap items-center gap-2">
             {/* כפתור התקנת אפליקציה */}
             {deferredPrompt && (
-              <button onClick={handleInstallClick} className="text-xs bg-cyan-600 hover:bg-cyan-500 border border-cyan-500 text-white px-4 py-2.5 rounded-xl font-black shadow-md transition-all active:scale-95 animate-bounce">
+              <button onClick={handleInstallClick} className="text-xs bg-sky-600 hover:bg-sky-500 border border-sky-500 text-white px-4 py-2.5 rounded-xl font-black shadow-md transition-all active:scale-95 animate-bounce">
                 📱 התקן אפליקציה במסך הבית
               </button>
             )}
             {/* כפתור איפוס התקדמות */}
-            <button onClick={resetProgress} className="text-xs bg-slate-800 hover:bg-slate-700 border border-slate-700 text-cyan-300 px-4 py-2 rounded-xl font-bold shadow-md transition-all active:scale-95">
+            <button onClick={resetProgress} className="text-xs bg-slate-700 hover:bg-slate-600 border border-slate-650 text-sky-300 px-4 py-2 rounded-xl font-bold shadow-md transition-all active:scale-95">
               איפוס התקדמות 🔄
             </button>
           </div>
         </header>
 
         {/* ⏱️ פס התקדמות וטיימר יומי של 10 דקות */}
-        <div className="bg-slate-900 border border-slate-800 rounded-3xl p-5 shadow-xl space-y-3">
+        <div className="bg-slate-800 border border-slate-700 rounded-3xl p-5 shadow-xl space-y-3">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
             <div className="flex items-center gap-2.5">
               <span className="text-2xl">⏱️</span>
               <div>
                 <span className="font-extrabold text-slate-200">זמן אימון יומי:</span>
-                <span className="text-cyan-400 font-black ml-1.5 text-lg">
+                <span className="text-sky-400 font-black ml-1.5 text-lg">
                   {Math.floor(secondsPracticed / 60)}:{(secondsPracticed % 60).toString().padStart(2, '0')}
                 </span>
-                <span className="text-slate-500 text-sm"> / 10:00 דקות</span>
+                <span className="text-slate-505 text-sm"> / 10:00 דקות</span>
               </div>
             </div>
             {/* משפטי עידוד משתנים */}
             <div className="text-right sm:text-left">
-              <p className="text-xs md:text-sm text-cyan-400 font-extrabold" dir="ltr">"{timerEncouragement.en}"</p>
+              <p className="text-xs md:text-sm text-sky-400 font-extrabold" dir="ltr">"{timerEncouragement.en}"</p>
               <p className="text-xs text-slate-400 font-bold">"{timerEncouragement.he}"</p>
             </div>
           </div>
           
           {/* Progress Bar */}
-          <div className="w-full bg-slate-950 border border-slate-800 h-4 rounded-full overflow-hidden relative shadow-inner">
+          <div className="w-full bg-slate-900 border border-slate-750 h-4 rounded-full overflow-hidden relative shadow-inner">
             <div 
-              className="bg-gradient-to-r from-cyan-500 to-emerald-400 h-full transition-all duration-1000 shadow-[0_0_10px_rgba(6,182,212,0.5)]" 
+              className="bg-gradient-to-r from-sky-500 to-emerald-400 h-full transition-all duration-1000" 
               style={{ width: `${Math.min((secondsPracticed / 600) * 100, 100)}%` }} 
             />
           </div>
         </div>
 
-        {/* ⚽ לוח פידבק מאמן הסייבר */}
-        <div className="bg-gradient-to-r from-slate-900 to-slate-950 border-2 border-cyan-800/40 rounded-3xl p-4 shadow-lg flex items-center gap-4">
-          <div className="bg-cyan-955/60 border border-cyan-800/50 w-12 h-12 rounded-full flex items-center justify-center text-2xl shadow-inner animate-pulse">
+        {/* ⚽ לוח פידבק מאמן האנגלית */}
+        <div className="bg-slate-800 border border-slate-700 rounded-3xl p-4 shadow-lg flex items-center gap-4">
+          <div className="bg-slate-900 border border-slate-700 w-12 h-12 rounded-full flex items-center justify-center text-2xl shadow-inner">
             🧔
           </div>
           <div className="flex-1 text-right">
-            <h3 className="text-xs font-black text-cyan-400 uppercase tracking-wider">מאמן הסייבר של יובל</h3>
+            <h3 className="text-xs font-black text-sky-400 uppercase tracking-wider">מאמן האנגלית של יובל</h3>
             <p className="text-slate-200 font-bold text-sm sm:text-base mt-0.5">{coachMsg}</p>
           </div>
         </div>
@@ -1010,7 +1010,7 @@ export default function App() {
         <nav className="flex flex-wrap justify-center gap-2">
           <NavBtn icon="🎓" label="למידה" id="learn" />
           <NavBtn icon="📖" label="ספריה" id="library" />
-          <NavBtn icon="🗣️" label="חוקי קריאה" id="reading-rules" action={() => { setView('reading-rules'); setPhonicsRuleIdx(0); setPhonicsWordIdx(0); setPhonicsFeedback(null); }} />
+          <NavBtn icon="🗣️" label="חוקי קריאה" id="reading-rules" action={() => { setView('reading-rules'); setPhonicsRuleIdx(null); setPhonicsWordIdx(0); setPhonicsFeedback(null); }} />
           <NavBtn icon="🔗" label="אנלוגיות" id="analogies" action={() => { setView('analogies'); setAnalogyIndex(Math.floor(Math.random() * analogiesData.length)); }} />
           <NavBtn icon="✍️" label="משפטים" id="completion" action={() => { setView('completion'); setCompIndex(Math.floor(Math.random() * completionData.length)); }} />
           <NavBtn icon="🧩" label="חצאי משפטים" id="half-sentences" action={startHalfSentences} />
@@ -1021,17 +1021,17 @@ export default function App() {
 
         {/* ── LEARN (🎓 למידה) ────────────────────────────────────── */}
         {view === 'learn' && (
-          <div className="bg-slate-900 border border-slate-800 rounded-[2.5rem] p-6 md:p-10 shadow-2xl text-center relative min-h-[460px] flex flex-col justify-center transition-all">
+          <div className="bg-slate-800 border border-slate-700 rounded-[2.5rem] p-6 md:p-10 shadow-2xl text-center relative min-h-[460px] flex flex-col justify-center transition-all">
             {feedback && (
               <div className={`absolute top-0 left-0 w-full p-3 rounded-t-[2.5rem] font-black text-sm text-center shadow-md transition-all
-                ${feedback.type === 'success' ? 'bg-cyan-600 text-white' : 'bg-red-600 text-white'}`}>
+                ${feedback.type === 'success' ? 'bg-sky-600 text-white' : 'bg-red-600 text-white'}`}>
                 {feedback.message}
               </div>
             )}
             
-            <span className="text-xs bg-slate-800 text-slate-400 px-3 py-1 rounded-full w-max mx-auto font-bold mb-4">כרטיסיית לימוד</span>
+            <span className="text-xs bg-slate-700 text-slate-400 px-3 py-1 rounded-full w-max mx-auto font-bold mb-4">כרטיסיית לימוד</span>
             
-            <h2 className="text-6xl font-black text-cyan-400 drop-shadow-[0_0_15px_rgba(34,211,238,0.3)] mb-2" dir="ltr">
+            <h2 className="text-6xl font-black text-sky-400 mb-2" dir="ltr">
               {currentWord.en}
             </h2>
             <p className="text-2xl font-bold text-slate-300 mb-6">
@@ -1043,18 +1043,18 @@ export default function App() {
                 <div className="flex justify-center gap-4">
                   <button onClick={() => speakWord(currentWord.en)}
                     title="הקראה רגילה"
-                    className="w-20 h-20 bg-cyan-600 border border-cyan-500 text-white rounded-full flex items-center justify-center mx-auto shadow-lg hover:scale-110 active:scale-95 transition-all text-3xl">
+                    className="w-20 h-20 bg-sky-600 border border-sky-500 text-white rounded-full flex items-center justify-center mx-auto shadow-lg hover:scale-110 active:scale-95 transition-all text-3xl">
                     🔊
                   </button>
                   <button onClick={() => speakWord(currentWord.en, 0.55)}
                     title="הקראה איטית"
-                    className="w-20 h-20 bg-slate-800 border border-slate-700 text-cyan-400 rounded-full flex items-center justify-center mx-auto shadow-lg hover:scale-110 active:scale-95 transition-all text-3xl">
+                    className="w-20 h-20 bg-slate-700 border border-slate-600 text-sky-400 rounded-full flex items-center justify-center mx-auto shadow-lg hover:scale-110 active:scale-95 transition-all text-3xl">
                     🐢
                   </button>
                 </div>
                 <p className="text-slate-400 text-xs font-bold">לחץ כדי לשמוע את ההגייה (רגיל או איטי)</p>
                 <button onClick={() => setStep(2)}
-                  className="mt-6 px-8 py-4 bg-cyan-600 hover:bg-cyan-500 text-white font-black text-lg rounded-2xl shadow-xl hover:scale-105 transition-all w-full max-w-xs mx-auto block border border-cyan-500">
+                  className="mt-6 px-8 py-4 bg-sky-600 hover:bg-sky-500 text-white font-black text-lg rounded-2xl shadow-xl hover:scale-105 transition-all w-full max-w-xs mx-auto block border border-sky-500">
                   אני מכיר, נעבור לתרגום ✨
                 </button>
               </div>
@@ -1066,7 +1066,7 @@ export default function App() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl mx-auto">
                   {options.map((opt, i) => (
                     <button key={i} onClick={() => checkTranslation(opt.he)}
-                      className="p-5 bg-slate-800 hover:bg-cyan-950/60 border-2 border-slate-700 hover:border-cyan-500 rounded-2xl font-bold text-lg text-slate-100 transition-all shadow-md">
+                      className="p-5 bg-slate-900 hover:bg-sky-950/40 border-2 border-slate-750 hover:border-sky-500 rounded-2xl font-bold text-lg text-slate-100 transition-all shadow-md">
                       {opt.he}
                     </button>
                   ))}
@@ -1076,14 +1076,14 @@ export default function App() {
 
             {step === 3 && (
               <div className="space-y-6">
-                <p className="text-slate-300 font-extrabold text-base">עכשיו תורך! לחץ על המיקרופון ואמור את המילה באנגלית:</p>
+                <p className="text-slate-305 font-extrabold text-base">עכשיו תורך! לחץ על המיקרופון ואמור את המילה באנגלית:</p>
                 
                 <button onClick={handleSpeech}
                   disabled={isListening}
                   className={`w-28 h-28 rounded-full flex items-center justify-center mx-auto shadow-2xl transition-all relative text-4xl border-4
                     ${isListening 
-                      ? 'bg-red-600 border-red-500 scale-115 shadow-[0_0_20px_rgba(220,38,38,0.5)]' 
-                      : 'bg-cyan-600 border-cyan-500 hover:bg-cyan-500 hover:scale-105'}`}>
+                      ? 'bg-red-650 border-red-500 scale-115 shadow-[0_0_15px_rgba(220,38,38,0.3)]' 
+                      : 'bg-sky-600 border-sky-500 hover:bg-sky-505 hover:scale-105'}`}>
                   {isListening && <span className="absolute inset-0 rounded-full border-4 border-red-400 animate-ping" />}
                   🎤
                 </button>
@@ -1093,24 +1093,24 @@ export default function App() {
                 </p>
                 
                 <button onClick={skipSpeech}
-                  className="px-5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-350 rounded-xl font-bold text-xs border border-slate-700 transition-all mx-auto block">
+                  className="px-5 py-2 bg-slate-900 hover:bg-slate-700 text-slate-350 rounded-xl font-bold text-xs border border-slate-750 transition-all mx-auto block">
                   דלג על המילה ⏭
                 </button>
               </div>
             )}
 
             {/* progress bar */}
-            <div className="w-full bg-slate-950 border border-slate-800 h-3 rounded-full mt-10 overflow-hidden shadow-inner">
-              <div className="bg-cyan-500 h-full transition-all duration-700" style={{ width: `${(masteredIndexes.length / wordsData.length) * 100}%` }} />
+            <div className="w-full bg-slate-900 border border-slate-750 h-3 rounded-full mt-10 overflow-hidden shadow-inner">
+              <div className="bg-sky-500 h-full transition-all duration-700" style={{ width: `${(masteredIndexes.length / wordsData.length) * 100}%` }} />
             </div>
-            <p className="text-slate-500 text-xs mt-2 font-bold">{masteredIndexes.length} מתוך {wordsData.length} מילים נלמדו</p>
+            <p className="text-slate-505 text-xs mt-2 font-bold">{masteredIndexes.length} מתוך {wordsData.length} מילים נלמדו</p>
           </div>
         )}
 
         {/* ── LIBRARY (📖 ספריה) ──────────────────────────────────── */}
         {view === 'library' && (
-          <div className="bg-slate-900 border border-slate-800 rounded-[2.5rem] p-6 shadow-xl space-y-6">
-            <h2 className="text-2xl font-black text-cyan-400 text-center">ספריית המילים המלאה ({wordsData.length} מילים)</h2>
+          <div className="bg-slate-800 border border-slate-700 rounded-[2.5rem] p-6 shadow-xl space-y-6">
+            <h2 className="text-2xl font-black text-sky-400 text-center">ספריית המילים המלאה ({wordsData.length} מילים)</h2>
             
             {/* חיפוש מילים */}
             <div className="max-w-md mx-auto relative">
@@ -1119,10 +1119,10 @@ export default function App() {
                 placeholder="חפש מילה באנגלית או בעברית..." 
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-2xl px-5 py-3 text-slate-200 placeholder-slate-505 focus:outline-none focus:border-cyan-500 transition-all text-sm text-right"
+                className="w-full bg-slate-900 border border-slate-750 rounded-2xl px-5 py-3 text-slate-200 placeholder-slate-500 focus:outline-none focus:border-sky-500 transition-all text-sm text-right"
               />
               {searchQuery && (
-                <button onClick={() => setSearchQuery("")} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300 text-xs font-bold">
+                <button onClick={() => setSearchQuery("")} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-305 text-xs font-bold">
                   נקה
                 </button>
               )}
@@ -1136,14 +1136,14 @@ export default function App() {
                   <div key={idxInMain} onClick={() => { setActiveWordIndex(idxInMain); setStep(1); setView('learn'); }}
                     className={`p-4 rounded-2xl border-2 cursor-pointer transition-all hover:scale-105 flex flex-col justify-between min-h-[90px]
                       ${isMastered 
-                        ? 'bg-cyan-950/40 border-cyan-600 shadow-[0_0_10px_rgba(6,182,212,0.15)]' 
-                        : 'bg-slate-850 border-slate-800 hover:border-cyan-800'}`}>
+                        ? 'bg-sky-950/20 border-sky-600/65 shadow-md' 
+                        : 'bg-slate-900 border-slate-750 hover:border-sky-800'}`}>
                     <div>
                       <p className="font-black text-base text-center text-slate-100" dir="ltr">{w.en}</p>
                       <p className="text-xs text-center text-slate-400 mt-1">{w.he}</p>
                       <p className="text-[10px] text-center text-slate-500 mt-0.5" dir="rtl">{w.pron}</p>
                     </div>
-                    {isMastered && <span className="text-cyan-400 text-center block mt-1.5 font-bold text-xs">✓ נלמד</span>}
+                    {isMastered && <span className="text-sky-400 text-center block mt-1.5 font-bold text-xs">✓ נלמד</span>}
                   </div>
                 );
               })}
@@ -1153,128 +1153,142 @@ export default function App() {
 
         {/* ── READING RULES (🗣️ חוקי קריאה וצלילים) ────────────────────────── */}
         {view === 'reading-rules' && (
-          <div className="bg-slate-900 border border-slate-800 rounded-[2.5rem] p-6 md:p-8 shadow-xl space-y-6">
-            <h2 className="text-2xl font-black text-cyan-400 text-center flex items-center justify-center gap-2">
+          <div className="bg-slate-800 border border-slate-700 rounded-[2.5rem] p-6 md:p-8 shadow-xl space-y-6">
+            <h2 className="text-2xl font-black text-sky-400 text-center flex items-center justify-center gap-2">
               <span>🗣️ חוקי קריאה וצלילים (Phonics)</span>
             </h2>
 
-            {/* תפריט חוקים */}
-            <div className="flex flex-wrap justify-center gap-2 border-b border-slate-800 pb-4">
-              {readingPatternsData.map((rule, idx) => (
-                <button 
-                  key={idx} 
-                  onClick={() => { setPhonicsRuleIdx(idx); setPhonicsWordIdx(0); setPhonicsFeedback(null); }}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all
-                    ${phonicsRuleIdx === idx ? 'bg-cyan-600 text-white' : 'bg-slate-880 text-slate-400 hover:bg-slate-700'}`}>
-                  {rule.pattern}
-                </button>
-              ))}
-            </div>
-
-            {/* תוכן החוק הנבחר */}
-            <div className="space-y-6 text-center">
-              <div className="bg-slate-950 border border-slate-855 p-5 rounded-2xl text-right">
-                <h3 className="text-cyan-400 font-extrabold text-base mb-1.5">{readingPatternsData[phonicsRuleIdx].pattern}</h3>
-                <p className="text-slate-300 text-sm font-medium leading-relaxed">{readingPatternsData[phonicsRuleIdx].hebrew}</p>
-              </div>
-
-              {/* כרטיס המילה הפעילה בחוק */}
-              {readingPatternsData[phonicsRuleIdx].words[phonicsWordIdx] && (
-                <div className="bg-slate-950 border border-slate-800 rounded-3xl p-6 max-w-xl mx-auto shadow-inner space-y-4">
-                  {phonicsFeedback && (
-                    <div className={`p-2 rounded-xl text-xs font-bold text-center ${phonicsFeedback.type === 'success' ? 'bg-cyan-600 text-white' : 'bg-red-600 text-white'}`}>
-                      {phonicsFeedback.message}
-                    </div>
-                  )}
-
-                  <p className="text-slate-400 text-sm italic" dir="ltr">
-                    "{readingPatternsData[phonicsRuleIdx].words[phonicsWordIdx].intro}"
-                  </p>
-                  
-                  <h4 className="text-5xl font-black text-cyan-400 tracking-wide drop-shadow-[0_0_10px_rgba(34,211,238,0.2)]" dir="ltr">
-                    {readingPatternsData[phonicsRuleIdx].words[phonicsWordIdx].word}
-                  </h4>
-                  
-                  <p className="text-slate-500 font-bold tracking-widest text-lg" dir="ltr">
-                    {readingPatternsData[phonicsRuleIdx].words[phonicsWordIdx].breakdown}
-                  </p>
-
-                  <p className="text-slate-200 font-extrabold text-lg">
-                    {readingPatternsData[phonicsRuleIdx].words[phonicsWordIdx].hebrew} 
-                    <span className="text-slate-505 text-sm font-medium"> ({readingPatternsData[phonicsRuleIdx].words[phonicsWordIdx].pron})</span>
-                  </p>
-
-                  {/* כפתורי שמע והקלטה */}
-                  <div className="flex justify-center items-center gap-3 pt-3 flex-wrap">
-                    <button 
-                      onClick={() => speakWord(readingPatternsData[phonicsRuleIdx].words[phonicsWordIdx].word)}
-                      title="השמע מילה"
-                      className="px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl text-sm font-bold text-slate-350 hover:bg-slate-700 active:scale-95 transition-all flex items-center gap-1">
-                      <span>🔊</span> רגיל
-                    </button>
-                    <button 
-                      onClick={() => speakWord(readingPatternsData[phonicsRuleIdx].words[phonicsWordIdx].word, 0.55)}
-                      title="השמע מילה לאט"
-                      className="px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl text-sm font-bold text-slate-350 hover:bg-slate-700 active:scale-95 transition-all flex items-center gap-1">
-                      <span>🐢</span> איטי
-                    </button>
-
-                    <button 
-                      onClick={() => handlePhonicsSpeech(readingPatternsData[phonicsRuleIdx].words[phonicsWordIdx].word)}
-                      disabled={phonicsListening}
-                      className={`px-5 py-2.5 rounded-xl text-sm font-extrabold flex items-center gap-1.5 border active:scale-95 transition-all
-                        ${phonicsListening 
-                          ? 'bg-red-600 border-red-500 text-white animate-pulse' 
-                          : 'bg-cyan-600 border-cyan-500 text-white hover:bg-cyan-500'}`}>
-                      <span>🎤</span> {phonicsListening ? "מקשיב..." : "דבר"}
-                    </button>
-                  </div>
-
-                  {phonicsMastered[readingPatternsData[phonicsRuleIdx].words[phonicsWordIdx].word] && (
-                    <div className="text-cyan-400 font-extrabold text-xs">
-                      ✓ קראת נכון! המילה סומנה כהצלחה במאגר!
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {/* ניווט בין המילים של החוק */}
-              <div className="flex justify-center gap-2">
-                {readingPatternsData[phonicsRuleIdx].words.map((_, wIdx) => (
+            {phonicsRuleIdx === null ? (
+              /* תצוגת רשימת חוקים - כרטיסיות נקיות וידידותיות */
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto pt-2">
+                {readingPatternsData.map((rule, idx) => (
                   <button 
-                    key={wIdx} 
-                    onClick={() => { setPhonicsWordIdx(wIdx); setPhonicsFeedback(null); }}
-                    className={`w-9 h-9 rounded-full font-bold text-xs transition-all
-                      ${phonicsWordIdx === wIdx ? 'bg-cyan-600 text-white scale-110' : 'bg-slate-800 text-slate-550 hover:bg-slate-700'}`}>
-                    {wIdx + 1}
+                    key={idx}
+                    onClick={() => { setPhonicsRuleIdx(idx); setPhonicsWordIdx(0); setPhonicsFeedback(null); }}
+                    className="bg-slate-900 border border-slate-750 hover:border-sky-505 p-5 rounded-2xl text-right transition-all hover:scale-[1.02] active:scale-95 flex flex-col justify-between min-h-[140px] group shadow-md">
+                    <div>
+                      <span className="text-xs bg-slate-800 text-slate-400 px-2.5 py-1 rounded-full font-bold">חוק {idx + 1}</span>
+                      <h3 className="text-slate-100 font-extrabold text-lg mt-2 group-hover:text-sky-350 transition-colors">{rule.pattern}</h3>
+                    </div>
+                    <p className="text-slate-400 text-xs mt-3 line-clamp-2">{rule.hebrew}</p>
                   </button>
                 ))}
               </div>
-            </div>
+            ) : (
+              /* תצוגת פירוט חוק נבחר */
+              <div className="space-y-6 text-center">
+                <div className="flex justify-between items-center max-w-xl mx-auto border-b border-slate-700 pb-3">
+                  <button 
+                    onClick={() => setPhonicsRuleIdx(null)}
+                    className="px-3.5 py-1.5 bg-slate-700 hover:bg-slate-600 text-slate-200 rounded-xl font-bold text-xs transition-all border border-slate-600">
+                    ← חזרה לרשימת החוקים
+                  </button>
+                  <span className="text-xs text-slate-400 font-bold">חוק {phonicsRuleIdx + 1} מתוך {readingPatternsData.length}</span>
+                </div>
+
+                <div className="bg-slate-900 border border-slate-750 p-5 rounded-2xl text-right max-w-xl mx-auto shadow-inner">
+                  <h3 className="text-sky-400 font-extrabold text-base mb-1.5">{readingPatternsData[phonicsRuleIdx].pattern}</h3>
+                  <p className="text-slate-300 text-sm font-medium leading-relaxed">{readingPatternsData[phonicsRuleIdx].hebrew}</p>
+                </div>
+
+                {/* כרטיס המילה הפעילה בחוק */}
+                {readingPatternsData[phonicsRuleIdx].words[phonicsWordIdx] && (
+                  <div className="bg-slate-900 border border-slate-750 rounded-3xl p-6 max-w-xl mx-auto shadow-md space-y-4">
+                    {phonicsFeedback && (
+                      <div className={`p-2 rounded-xl text-xs font-bold text-center ${phonicsFeedback.type === 'success' ? 'bg-sky-600 text-white' : 'bg-red-600 text-white'}`}>
+                        {phonicsFeedback.message}
+                      </div>
+                    )}
+
+                    <p className="text-slate-400 text-sm italic" dir="ltr">
+                      "{readingPatternsData[phonicsRuleIdx].words[phonicsWordIdx].intro}"
+                    </p>
+                    
+                    <h4 className="text-5xl font-black text-sky-400 tracking-wide" dir="ltr">
+                      {readingPatternsData[phonicsRuleIdx].words[phonicsWordIdx].word}
+                    </h4>
+                    
+                    <p className="text-slate-500 font-bold tracking-widest text-lg" dir="ltr">
+                      {readingPatternsData[phonicsRuleIdx].words[phonicsWordIdx].breakdown}
+                    </p>
+
+                    <p className="text-slate-200 font-extrabold text-lg">
+                      {readingPatternsData[phonicsRuleIdx].words[phonicsWordIdx].hebrew} 
+                      <span className="text-slate-500 text-sm font-medium"> ({readingPatternsData[phonicsRuleIdx].words[phonicsWordIdx].pron})</span>
+                    </p>
+
+                    {/* כפתורי שמע והקלטה */}
+                    <div className="flex justify-center items-center gap-3 pt-3 flex-wrap">
+                      <button 
+                        onClick={() => speakWord(readingPatternsData[phonicsRuleIdx].words[phonicsWordIdx].word)}
+                        title="השמע מילה"
+                        className="px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl text-sm font-bold text-slate-300 hover:bg-slate-700 active:scale-95 transition-all flex items-center gap-1">
+                        <span>🔊</span> רגיל
+                      </button>
+                      <button 
+                        onClick={() => speakWord(readingPatternsData[phonicsRuleIdx].words[phonicsWordIdx].word, 0.55)}
+                        title="השמע מילה לאט"
+                        className="px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl text-sm font-bold text-slate-300 hover:bg-slate-700 active:scale-95 transition-all flex items-center gap-1">
+                        <span>🐢</span> איטי
+                      </button>
+
+                      <button 
+                        onClick={() => handlePhonicsSpeech(readingPatternsData[phonicsRuleIdx].words[phonicsWordIdx].word)}
+                        disabled={phonicsListening}
+                        className={`px-5 py-2.5 rounded-xl text-sm font-extrabold flex items-center gap-1.5 border active:scale-95 transition-all
+                          ${phonicsListening 
+                            ? 'bg-red-650 border-red-500 text-white animate-pulse' 
+                            : 'bg-sky-600 border-sky-500 text-white hover:bg-sky-505'}`}>
+                        <span>🎤</span> {phonicsListening ? "מקשיב..." : "דבר"}
+                      </button>
+                    </div>
+
+                    {phonicsMastered[readingPatternsData[phonicsRuleIdx].words[phonicsWordIdx].word] && (
+                      <div className="text-sky-400 font-extrabold text-xs">
+                        ✓ קראת נכון! המילה סומנה כהצלחה במאגר!
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* ניווט בין המילים של החוק */}
+                <div className="flex justify-center gap-2">
+                  {readingPatternsData[phonicsRuleIdx].words.map((_, wIdx) => (
+                    <button 
+                      key={wIdx} 
+                      onClick={() => { setPhonicsWordIdx(wIdx); setPhonicsFeedback(null); }}
+                      className={`w-9 h-9 rounded-full font-bold text-xs transition-all
+                        ${phonicsWordIdx === wIdx ? 'bg-sky-600 text-white scale-110' : 'bg-slate-750 text-slate-400 hover:bg-slate-700'}`}>
+                      {wIdx + 1}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         )}
 
         {/* ── ANALOGIES (🔗 אנלוגיות) ────────────────────────────────── */}
         {view === 'analogies' && (
-          <div className="bg-slate-900 border border-slate-800 rounded-[2.5rem] p-6 md:p-10 shadow-xl border-t-8 border-purple-600 text-center transition-all">
-            <h2 className="text-2xl font-black text-purple-400 mb-6">אנלוגיות משפטים 🔗</h2>
+          <div className="bg-slate-800 border border-slate-700 rounded-[2.5rem] p-6 md:p-10 shadow-xl border-t-8 border-indigo-600 text-center transition-all">
+            <h2 className="text-2xl font-black text-indigo-400 mb-6">אנלוגיות משפטים 🔗</h2>
             
-            <div className="bg-purple-950/40 border border-purple-800/40 px-5 py-2 rounded-full inline-block mb-6 font-bold text-purple-300 text-sm">
+            <div className="bg-indigo-950/40 border border-indigo-800/40 px-5 py-2 rounded-full inline-block mb-6 font-bold text-indigo-300 text-sm">
               סוג קשר: {analogiesData[analogyIndex].relation}
             </div>
 
-            <div className="flex justify-center items-center gap-3 text-xl sm:text-2xl font-black bg-slate-950 border border-slate-850 p-5 rounded-2xl mb-4 max-w-xl mx-auto flex-wrap" dir="ltr">
+            <div className="flex justify-center items-center gap-3 text-xl sm:text-2xl font-black bg-slate-900 border border-slate-750 p-5 rounded-2xl mb-4 max-w-xl mx-auto flex-wrap" dir="ltr">
               <span className="text-slate-100">{analogiesData[analogyIndex].word1}</span>
-              <span className="text-purple-400">↔</span>
+              <span className="text-indigo-455">↔</span>
               <span className="text-slate-100">{analogiesData[analogyIndex].word2}</span>
             </div>
 
             <div className="text-sm text-slate-400 font-bold mb-4">בדיוק באותו אופן:</div>
 
-            <div className="flex justify-center items-center gap-3 text-xl sm:text-2xl font-black bg-purple-950 border-2 border-purple-700 p-5 rounded-2xl mb-8 max-w-xl mx-auto flex-wrap" dir="ltr">
-              <span className="text-purple-200">{analogiesData[analogyIndex].word3}</span>
-              <span className="text-purple-400">↔</span>
-              <span className="border-b-4 border-purple-400 text-purple-400 w-16 text-center">?</span>
+            <div className="flex justify-center items-center gap-3 text-xl sm:text-2xl font-black bg-indigo-950/40 border-2 border-indigo-700 p-5 rounded-2xl mb-8 max-w-xl mx-auto flex-wrap" dir="ltr">
+              <span className="text-indigo-200">{analogiesData[analogyIndex].word3}</span>
+              <span className="text-indigo-455">↔</span>
+              <span className="border-b-4 border-indigo-400 text-indigo-400 w-16 text-center">?</span>
             </div>
 
             <div className="grid grid-cols-2 gap-4 max-w-xl mx-auto">
@@ -1288,7 +1302,7 @@ export default function App() {
                     playSound('error');
                     setCoachMsg(getCoachFeedback('error', "הקשר שבחרת לא תואם. נסה שוב!"));
                   }
-                }} className="p-4 bg-slate-800 border-2 border-slate-700 hover:border-purple-500 rounded-2xl font-black text-lg text-slate-100 hover:bg-purple-955/60 transition-all shadow-sm" dir="ltr">
+                }} className="p-4 bg-slate-900 border-2 border-slate-750 rounded-2xl font-black text-lg text-slate-100 hover:bg-indigo-950/40 transition-all shadow-sm" dir="ltr">
                   {opt}
                 </button>
               ))}
@@ -1298,12 +1312,12 @@ export default function App() {
 
         {/* ── COMPLETION (✍️ השלמת משפטים) ─────────────────────────────── */}
         {view === 'completion' && (
-          <div className="bg-slate-900 border border-slate-800 rounded-[2.5rem] p-6 md:p-10 shadow-xl border-t-8 border-emerald-600 text-center transition-all">
-            <h2 className="text-2xl font-black text-emerald-405 mb-6">השלמת משפטים ✍️</h2>
+          <div className="bg-slate-800 border border-slate-700 rounded-[2.5rem] p-6 md:p-10 shadow-xl border-t-8 border-teal-600 text-center transition-all">
+            <h2 className="text-2xl font-black text-teal-400 mb-6">השלמת משפטים ✍️</h2>
             
-            <div className="bg-slate-950 p-6 rounded-2xl border border-slate-855 mb-8 text-xl font-bold text-slate-100 leading-relaxed max-w-2xl mx-auto" dir="ltr">
+            <div className="bg-slate-900 p-6 rounded-2xl border border-slate-750 mb-8 text-xl font-bold text-slate-100 leading-relaxed max-w-2xl mx-auto" dir="ltr">
               {completionData[compIndex].sentence.split('_______')[0]}
-              <span className="inline-block border-b-4 border-emerald-400 text-emerald-400 px-4">?</span>
+              <span className="inline-block border-b-4 border-teal-400 text-teal-400 px-4">?</span>
               {completionData[compIndex].sentence.split('_______')[1]}
             </div>
 
@@ -1318,7 +1332,7 @@ export default function App() {
                     playSound('error');
                     setCoachMsg(getCoachFeedback('error', "בחירה לא נכונה. תעבור מגן ותנסה שוב!"));
                   }
-                }} className="p-4 bg-slate-800 border-2 border-slate-700 hover:border-emerald-500 rounded-2xl font-black text-base sm:text-lg text-slate-100 hover:bg-emerald-950/40 transition-all shadow-sm" dir="ltr">
+                }} className="p-4 bg-slate-900 border-2 border-slate-750 rounded-2xl font-black text-base sm:text-lg text-slate-100 hover:bg-teal-950/40 transition-all shadow-sm" dir="ltr">
                   {opt}
                 </button>
               ))}
@@ -1328,40 +1342,40 @@ export default function App() {
 
         {/* ── HALF SENTENCES (🧩 חצאי משפטים - NEW) ────────────────────── */}
         {view === 'half-sentences' && halfSentences.length > 0 && (
-          <div className="bg-slate-900 border border-slate-800 rounded-[2.5rem] p-6 md:p-8 shadow-xl space-y-6">
+          <div className="bg-slate-800 border border-slate-700 rounded-[2.5rem] p-6 md:p-8 shadow-xl space-y-6">
             <div className="text-center">
-              <h2 className="text-2xl font-black text-cyan-400">🧩 משחק חצאי משפטים</h2>
+              <h2 className="text-2xl font-black text-sky-400">🧩 משחק חצאי משפטים</h2>
               <p className="text-xs text-slate-400 mt-1">חבר את ההתחלות בצד ימין עם הסיומות הלוגיות בצד שמאל</p>
             </div>
 
             {matchedHalfIds.length === 5 ? (
               <div className="py-12 text-center space-y-6">
-                <h3 className="text-4xl font-black text-cyan-400 drop-shadow-[0_0_10px_rgba(34,211,238,0.3)]">ניצחון מלא! 🎉</h3>
-                <p className="text-slate-355 text-base font-bold">כל חצאי המשפטים חוברו בהצלחה מוחלטת!</p>
-                <button onClick={startHalfSentences} className="px-8 py-3.5 bg-cyan-600 border border-cyan-500 hover:bg-cyan-500 text-white font-extrabold rounded-2xl shadow-lg transition-all transform hover:scale-105">
+                <h3 className="text-4xl font-black text-sky-400">ניצחון מלא! 🎉</h3>
+                <p className="text-slate-300 text-base font-bold">כל חצאי המשפטים חוברו בהצלחה מוחלטת!</p>
+                <button onClick={startHalfSentences} className="px-8 py-3.5 bg-sky-600 border border-sky-500 hover:bg-sky-500 text-white font-extrabold rounded-2xl shadow-lg transition-all transform hover:scale-105">
                   שחק סיבוב נוסף
                 </button>
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
                 
-                {/* התחלות (Right Column in layout, Left logically in code) */}
+                {/* התחלות */}
                 <div className="space-y-3">
-                  <p className="text-xs font-black text-cyan-400 uppercase tracking-wider text-right">התחלות משפט:</p>
+                  <p className="text-xs font-black text-sky-400 uppercase tracking-wider text-right">התחלות משפט:</p>
                   {halfSentences.map((item) => {
                     const isMatched = matchedHalfIds.includes(item.id);
                     const isSelected = selectedLeft?.id === item.id;
                     const isWrong = wrongHalfIds.includes(item.id);
                     
-                    let cardStyle = "w-full text-right p-4 rounded-2xl border-2 transition-all duration-305 text-sm font-semibold select-none ";
+                    let cardStyle = "w-full text-right p-4 rounded-2xl border-2 transition-all duration-300 text-sm font-semibold select-none ";
                     if (isMatched) {
                       cardStyle += "bg-emerald-950/20 border-emerald-600/30 text-slate-500 cursor-default opacity-0 scale-95 pointer-events-none";
                     } else if (isWrong) {
-                      cardStyle += "bg-red-955/60 border-red-500 text-red-200 shadow-[0_0_10px_rgba(239,68,68,0.4)]";
+                      cardStyle += "bg-red-950/40 border-red-500 text-red-205";
                     } else if (isSelected) {
-                      cardStyle += "bg-cyan-955/60 border-cyan-500 text-cyan-200 shadow-[0_0_15px_rgba(6,182,212,0.3)] scale-[1.02]";
+                      cardStyle += "bg-sky-950/40 border-sky-500 text-sky-200 scale-[1.01]";
                     } else {
-                      cardStyle += "bg-slate-950 border-slate-800 hover:border-cyan-800 text-slate-200 hover:scale-[1.01]";
+                      cardStyle += "bg-slate-900 border-slate-750 hover:border-sky-500 text-slate-200 hover:scale-[1.01]";
                     }
 
                     return (
@@ -1377,9 +1391,9 @@ export default function App() {
                   })}
                 </div>
 
-                {/* סיומות (Left Column in layout, Right logically in code) */}
+                {/* סיומות */}
                 <div className="space-y-3">
-                  <p className="text-xs font-black text-cyan-400 uppercase tracking-wider text-right">סיומות משפט:</p>
+                  <p className="text-xs font-black text-sky-400 uppercase tracking-wider text-right">סיומות משפט:</p>
                   {[...halfSentences].sort((a,b) => a.id - b.id).map((item) => {
                     const isMatched = matchedHalfIds.includes(item.id);
                     const isSelected = selectedRight?.id === item.id;
@@ -1389,11 +1403,11 @@ export default function App() {
                     if (isMatched) {
                       cardStyle += "bg-emerald-950/20 border-emerald-600/30 text-slate-500 cursor-default opacity-0 scale-95 pointer-events-none";
                     } else if (isWrong) {
-                      cardStyle += "bg-red-955/60 border-red-500 text-red-200 shadow-[0_0_10px_rgba(239,68,68,0.4)]";
+                      cardStyle += "bg-red-950/40 border-red-500 text-red-205";
                     } else if (isSelected) {
-                      cardStyle += "bg-cyan-955/60 border-cyan-500 text-cyan-200 shadow-[0_0_15px_rgba(6,182,212,0.3)] scale-[1.02]";
+                      cardStyle += "bg-sky-955/40 border-sky-500 text-sky-200 scale-[1.01]";
                     } else {
-                      cardStyle += "bg-slate-950 border-slate-800 hover:border-cyan-800 text-slate-200 hover:scale-[1.01]";
+                      cardStyle += "bg-slate-900 border-slate-750 hover:border-sky-500 text-slate-200 hover:scale-[1.01]";
                     }
 
                     return (
@@ -1416,13 +1430,13 @@ export default function App() {
 
         {/* ── READING LIST (📚 רשימת קריאה) ───────────────────────────────── */}
         {view === 'reading-list' && (
-          <div className="bg-slate-900 border border-slate-800 rounded-[2.5rem] p-6 shadow-xl space-y-6">
-            <h2 className="text-2xl font-black text-cyan-400 text-center">טקסטים לקריאה ושאלות הבנה 📚</h2>
+          <div className="bg-slate-800 border border-slate-700 rounded-[2.5rem] p-6 shadow-xl space-y-6">
+            <h2 className="text-2xl font-black text-sky-400 text-center">טקסטים לקריאה ושאלות הבנה 📚</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
               {readingData.map((story, idx) => (
                 <button key={idx} onClick={() => openReading(idx)}
-                  className="p-5 bg-slate-950 border-2 border-slate-800 rounded-2xl text-right hover:bg-cyan-950/40 hover:border-cyan-600 transition-all shadow-md group">
-                  <h3 className="font-black text-lg text-cyan-400 group-hover:text-cyan-300" dir="ltr">{story.title}</h3>
+                  className="p-5 bg-slate-900 border-2 border-slate-750 rounded-2xl text-right hover:bg-sky-955/40 hover:border-sky-500 transition-all shadow-md group">
+                  <h3 className="font-black text-lg text-sky-400 group-hover:text-sky-300" dir="ltr">{story.title}</h3>
                   <p className="text-slate-400 text-xs font-bold mt-1">{story.questions.length} שאלות הבנה מאתגרות</p>
                 </button>
               ))}
@@ -1432,33 +1446,33 @@ export default function App() {
 
         {/* ── READING (📖 קריאה פעילה) ────────────────────────────────────── */}
         {view === 'reading' && (
-          <div className="bg-slate-900 border border-slate-800 rounded-[2.5rem] p-6 md:p-8 shadow-xl space-y-6">
+          <div className="bg-slate-800 border border-slate-700 rounded-[2.5rem] p-6 md:p-8 shadow-xl space-y-6">
             <div className="flex items-center justify-between flex-wrap gap-2">
-              <button onClick={() => setView('reading-list')} className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-355 rounded-xl font-bold text-xs border border-slate-750">
+              <button onClick={() => setView('reading-list')} className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-slate-350 rounded-xl font-bold text-xs border border-slate-650">
                 ← חזרה לרשימה
               </button>
-              <h2 className="text-2xl font-black text-cyan-400" dir="ltr">{readingData[readingIndex].title}</h2>
+              <h2 className="text-2xl font-black text-sky-400" dir="ltr">{readingData[readingIndex].title}</h2>
               <div className="w-12" />
             </div>
 
             {/* גוף הטקסט */}
-            <div className="bg-slate-950 p-6 md:p-8 rounded-2xl border border-slate-850 text-base md:text-lg text-slate-200 leading-8 whitespace-pre-line text-justify" dir="ltr">
+            <div className="bg-slate-900 p-6 md:p-8 rounded-2xl border border-slate-750 text-base md:text-lg text-slate-205 leading-8 whitespace-pre-line text-justify" dir="ltr">
               {renderStoryText(readingData[readingIndex].text)}
             </div>
 
             <div className="text-center">
               <button onClick={() => speakWord(readingData[readingIndex].text.replace(/\[\[(.*?)\|.*?\|.*?\]\]/g, "$1"), 0.8)}
-                className="px-6 py-2.5 bg-slate-800 hover:bg-slate-700 border border-slate-750 text-cyan-400 rounded-xl font-extrabold text-sm flex items-center gap-1.5 mx-auto">
+                className="px-6 py-2.5 bg-slate-700 hover:bg-slate-600 border border-slate-650 text-sky-400 rounded-xl font-extrabold text-sm flex items-center gap-1.5 mx-auto">
                 <span>🔊</span> הקרא לי את הסיפור
               </button>
             </div>
 
-            <hr className="border-slate-800" />
-            <h3 className="text-xl font-black text-cyan-400 text-center">שאלות הבנה</h3>
+            <hr className="border-slate-700" />
+            <h3 className="text-xl font-black text-sky-400 text-center">שאלות הבנה</h3>
 
             {readingData[readingIndex].questions.map((q, qIdx) => (
-              <div key={qIdx} className="bg-slate-955 border border-slate-800 rounded-2xl p-5 space-y-3">
-                <p className="font-extrabold text-sm text-slate-405">שאלה {qIdx + 1}:</p>
+              <div key={qIdx} className="bg-slate-900 border border-slate-750 rounded-2xl p-5 space-y-3">
+                <p className="font-extrabold text-sm text-slate-400">שאלה {qIdx + 1}:</p>
                 <p className="font-black text-base text-slate-100" dir="ltr">{q.q}</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {q.options.map((opt, oIdx) => {
@@ -1466,13 +1480,13 @@ export default function App() {
                     let btnStyle = "w-full text-left p-3.5 rounded-xl font-bold text-sm border-2 transition-all ";
                     
                     if (answered === null) {
-                      btnStyle += "bg-slate-900 border-slate-805 text-slate-200 hover:bg-cyan-950/60 hover:border-cyan-500 cursor-pointer";
+                      btnStyle += "bg-slate-800 border-slate-700 text-slate-200 hover:bg-sky-955/40 hover:border-sky-500 cursor-pointer";
                     } else if (oIdx === q.correct) {
                       btnStyle += "bg-emerald-950/40 border-emerald-600 text-emerald-300 cursor-default";
                     } else if (oIdx === answered) {
-                      btnStyle += "bg-red-955/40 border-red-600 text-red-300 cursor-default";
+                      btnStyle += "bg-red-950/40 border-red-600 text-red-300 cursor-default";
                     } else {
-                      btnStyle += "bg-slate-900 border-slate-805 text-slate-505 opacity-40 cursor-default";
+                      btnStyle += "bg-slate-800 border-slate-700 text-slate-500 opacity-40 cursor-default";
                     }
 
                     return (
@@ -1495,15 +1509,15 @@ export default function App() {
 
         {/* ── MATCH (🃏 משחק זוגות) ────────────────────────────────────── */}
         {view === 'match' && (
-          <div className="bg-slate-900 border border-slate-800 rounded-[2.5rem] p-6 shadow-xl border-t-8 border-cyan-500 text-center transition-all min-h-[460px]">
-            <h2 className="text-2xl font-black text-cyan-400 mb-2">זוגות – מצא את ההתאמה 🃏</h2>
+          <div className="bg-slate-800 border border-slate-700 rounded-[2.5rem] p-6 shadow-xl border-t-8 border-sky-500 text-center transition-all min-h-[460px]">
+            <h2 className="text-2xl font-black text-sky-400 mb-2">זוגות – מצא את ההתאמה 🃏</h2>
             <p className="text-xs text-slate-400 mb-6">לחץ על מילה באנגלית ואז על התרגום וההגייה שלה בעברית</p>
             
             {matchedPairs.length === 6 ? (
               <div className="py-12 space-y-6">
-                <h3 className="text-4xl font-black text-cyan-400 drop-shadow-[0_0_10px_rgba(34,211,238,0.3)]">ניצחון מלא! 🎉</h3>
-                <p className="text-slate-350 text-base font-bold">התאמת את כל הזוגות כמו שחקן ליגה מקצוען!</p>
-                <button onClick={startMatchGame} className="px-8 py-3.5 bg-cyan-600 border border-cyan-500 hover:bg-cyan-500 text-white font-extrabold rounded-2xl shadow-lg transition-all transform hover:scale-105">
+                <h3 className="text-4xl font-black text-sky-400">ניצחון מלא! 🎉</h3>
+                <p className="text-slate-300 text-base font-bold">התאמת את כל הזוגות כמו שחקן ליגה מקצוען!</p>
+                <button onClick={startMatchGame} className="px-8 py-3.5 bg-sky-600 border border-sky-500 hover:bg-sky-500 text-white font-extrabold rounded-2xl shadow-lg transition-all transform hover:scale-105">
                   שחק סיבוב נוסף
                 </button>
               </div>
@@ -1516,10 +1530,10 @@ export default function App() {
                     <button key={i} onClick={() => handleCardClick(card)} disabled={isFlipped || isMatched}
                       className={`h-24 rounded-2xl font-black text-sm transition-all shadow-md flex items-center justify-center border-2 p-3 text-center
                         ${isMatched 
-                          ? 'opacity-0 scale-95 cursor-default bg-cyan-955 border-cyan-600 pointer-events-none' 
+                          ? 'opacity-0 scale-95 cursor-default bg-sky-955 border-sky-600 pointer-events-none' 
                           : isFlipped 
-                            ? 'bg-cyan-900 border-cyan-400 text-white scale-105 shadow-[0_0_10px_rgba(6,182,212,0.3)]' 
-                            : 'bg-slate-950 border-slate-800 text-slate-200 hover:border-cyan-800'}`}
+                            ? 'bg-sky-900 border-sky-450 text-white scale-105' 
+                            : 'bg-slate-900 border-slate-750 text-slate-205 hover:border-sky-500'}`}
                       dir={card.type === 'en' ? 'ltr' : 'rtl'}>
                       {card.text}
                     </button>
@@ -1532,31 +1546,31 @@ export default function App() {
 
         {/* ── QUIZ (🏆 בוחן מסכם) ───────────────────────────────────────── */}
         {view === 'quiz' && quizSet.length > 0 && (
-          <div className="bg-slate-900 border border-slate-800 rounded-[2.5rem] p-6 md:p-8 shadow-xl border-t-8 border-orange-500 text-center transition-all">
-            <h2 className="text-base font-bold text-orange-400 mb-6">שאלה {quizIndex + 1} מתוך {quizSet.length}</h2>
+          <div className="bg-slate-800 border border-slate-700 rounded-[2.5rem] p-6 md:p-8 shadow-xl border-t-8 border-amber-600 text-center transition-all">
+            <h2 className="text-base font-bold text-amber-405 mb-6">שאלה {quizIndex + 1} מתוך {quizSet.length}</h2>
             
             {quizSet[quizIndex].type === 'vocab' && (
               <div className="space-y-2 mb-8">
-                <h3 className="text-5xl font-black text-slate-100 drop-shadow-[0_0_10px_rgba(255,255,255,0.15)]" dir="ltr">{quizSet[quizIndex].question}</h3>
-                <p className="text-slate-505 font-bold text-sm">כיצד מבטאים ומפרשים מילה זו?</p>
+                <h3 className="text-5xl font-black text-slate-100" dir="ltr">{quizSet[quizIndex].question}</h3>
+                <p className="text-slate-400 font-bold text-sm">כיצד מבטאים ומפרשים מילה זו?</p>
               </div>
             )}
             
             {quizSet[quizIndex].type === 'analogy' && (
               <div className="mb-8 flex flex-col items-center gap-4">
-                <div className="text-xl font-black bg-slate-950 p-4 rounded-xl border border-slate-800 w-full max-w-sm flex justify-center gap-4" dir="ltr">
+                <div className="text-xl font-black bg-slate-900 p-4 rounded-xl border border-slate-750 w-full max-w-sm flex justify-center gap-4" dir="ltr">
                   <span>{quizSet[quizIndex].data.word1}</span> ↔ <span>{quizSet[quizIndex].data.word2}</span>
                 </div>
-                <div className="text-xl font-black text-orange-400 bg-orange-950/30 p-4 rounded-xl border border-orange-855 w-full max-w-sm flex justify-center gap-4" dir="ltr">
-                  <span>{quizSet[quizIndex].data.word3}</span> ↔ <span className="border-b-4 border-orange-400 min-w-[50px]">?</span>
+                <div className="text-xl font-black text-amber-400 bg-amber-950/20 border border-amber-800 w-full max-w-sm flex justify-center gap-4" dir="ltr">
+                  <span>{quizSet[quizIndex].data.word3}</span> ↔ <span className="border-b-4 border-amber-400 min-w-[50px]">?</span>
                 </div>
               </div>
             )}
 
             {quizSet[quizIndex].type === 'completion' && (
-              <div className="mb-8 text-lg font-bold bg-slate-950 p-5 rounded-2xl border border-slate-855 max-w-xl mx-auto" dir="ltr">
+              <div className="mb-8 text-lg font-bold bg-slate-900 p-5 rounded-2xl border border-slate-750 max-w-xl mx-auto" dir="ltr">
                 {quizSet[quizIndex].data.sentence.split('_______')[0]}
-                <span className="border-b-4 border-orange-400 px-4 text-orange-400">?</span>
+                <span className="border-b-4 border-amber-400 px-4 text-amber-400">?</span>
                 {quizSet[quizIndex].data.sentence.split('_______')[1]}
               </div>
             )}
@@ -1564,7 +1578,7 @@ export default function App() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl mx-auto">
               {quizSet[quizIndex].options.map((opt, i) => (
                 <button key={i} onClick={() => handleQuizAnswer(opt)}
-                  className="p-4 bg-slate-800 border-2 border-slate-700 hover:border-orange-500 rounded-2xl font-bold text-base sm:text-lg text-slate-100 hover:bg-orange-950/30 transition-all shadow-md">
+                  className="p-4 bg-slate-900 border-2 border-slate-750 rounded-2xl font-bold text-base sm:text-lg text-slate-100 hover:bg-amber-955/20 transition-all shadow-md">
                   {opt}
                 </button>
               ))}
@@ -1574,16 +1588,16 @@ export default function App() {
 
         {/* ── QUIZ RESULT (🏆 תוצאת בוחן) ─────────────────────────────────── */}
         {view === 'quiz-result' && (
-          <div className="bg-slate-900 border border-slate-800 rounded-[2.5rem] p-10 shadow-xl border-t-8 border-orange-500 text-center transition-all min-h-[380px] flex flex-col justify-center space-y-6">
-            <h2 className="text-3xl font-black text-orange-400">הבוחן הסתיים! 🏆</h2>
-            <p className="text-xl text-slate-355">הציון שלך בליגה הנוכחית:</p>
-            <div className="text-7xl font-black text-orange-400 drop-shadow-[0_0_15px_rgba(249,115,22,0.3)]">
+          <div className="bg-slate-800 border border-slate-700 rounded-[2.5rem] p-10 shadow-xl border-t-8 border-amber-600 text-center transition-all min-h-[380px] flex flex-col justify-center space-y-6">
+            <h2 className="text-3xl font-black text-amber-400">הבוחן הסתיים! 🏆</h2>
+            <p className="text-xl text-slate-350">הציון שלך בליגה הנוכחית:</p>
+            <div className="text-7xl font-black text-amber-400">
               {Math.round((quizScore / quizSet.length) * 100)}%
             </div>
             <p className="text-slate-400 text-sm font-bold">
               ענית נכון על {quizScore} שאלות מתוך {quizSet.length}
             </p>
-            <button onClick={() => setView('learn')} className="px-8 py-3.5 bg-orange-600 hover:bg-orange-500 border border-orange-500 text-white rounded-2xl font-extrabold text-lg shadow-lg hover:scale-105 transition-all mx-auto max-w-xs block">
+            <button onClick={() => setView('learn')} className="px-8 py-3.5 bg-amber-600 hover:bg-amber-500 border border-amber-500 text-white rounded-2xl font-extrabold text-lg shadow-lg hover:scale-105 transition-all mx-auto max-w-xs block">
               המשך למידה
             </button>
           </div>
