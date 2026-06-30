@@ -2,13 +2,27 @@
 <html lang="he" dir="rtl">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <title>יובל – English Zone</title>
-    <script type="module" crossorigin src="/yuval-8/assets/index-4zRcug1s.js"></script>
-    <link rel="stylesheet" crossorigin href="/yuval-8/assets/index-CGAxoab2.css">
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="apple-touch-icon" href="./icon-192.png" />
+    <meta name="theme-color" content="#06b6d4" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <title>יובל – English Zone 🎮</title>
+    <script type="module" crossorigin src="/yuval-8/assets/index-xP9yKJwE.js"></script>
+    <link rel="stylesheet" crossorigin href="/yuval-8/assets/index-ERgrhElv.css">
   </head>
-  <body style="font-family: 'Assistant', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
+  <body class="bg-slate-950" style="font-family: 'Assistant', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
     <div id="root"></div>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js')
+            .then(reg => console.log('Service Worker registered successfully!', reg))
+            .catch(err => console.log('Service Worker registration failed: ', err));
+        });
+      }
+    </script>
   </body>
 </html>
