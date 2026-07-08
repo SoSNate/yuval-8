@@ -122,7 +122,14 @@ const analogiesData = [
   { word1: "Although", word2: "Contrast (ניגוד)", word3: "Therefore", options: ["Result (תוצאה)", "Reason (סיבה)", "Addition (הוספה)", "Time (זמן)"], correct: "Result (תוצאה)" },
   { word1: "Enemy", word2: "Dangerous", relation: "קשר תיאורי", word3: "Teammate", options: ["Supportive", "Impossible", "Injured", "Polite"], correct: "Supportive" },
   { word1: "Mistake", word2: "Defeat", relation: "סיבה ותוצאה", word3: "Effort", options: ["Succeed", "Forget", "Offside", "Substitute"], correct: "Succeed" },
-  { word1: "League", word2: "Tournament", relation: "חלק מתוך שלם", word3: "Pitch", options: ["Stadium", "Referee", "Captain", "Midfielder"], correct: "Stadium" }
+  { word1: "League", word2: "Tournament", relation: "חלק מתוך שלם", word3: "Pitch", options: ["Stadium", "Referee", "Captain", "Midfielder"], correct: "Stadium" },
+  // 6 שאלות אתגר חדשות
+  { word1: "Competitive", word2: "Opponent", relation: "תכונה מצופה", word3: "Supportive", options: ["Teammate", "Enemy", "Spectator", "Referee"], correct: "Teammate" },
+  { word1: "Injured", word2: "Substitute", relation: "בעיה ופתרון", word3: "Offside", options: ["Penalty", "Trophy", "Champion", "Practice"], correct: "Penalty" },
+  { word1: "Patience", word2: "Succeed", relation: "דרישה מוקדמת", word3: "Effort", options: ["Achieve", "Forget", "Lose", "Escape"], correct: "Achieve" },
+  { word1: "Although", word2: "Contrast (ניגוד)", word3: "Furthermore", options: ["Addition (הוספה)", "Reason (סיבה)", "Result (תוצאה)", "Example (דוגמה)"], correct: "Addition (הוספה)" },
+  { word1: "Goalkeeper", word2: "Shield", relation: "אנלוגיית בעל תפקיד וכלי", word3: "Striker", options: ["Weapon", "Trophy", "Whistle", "Coach"], correct: "Weapon" },
+  { word1: "Discover", word2: "Realize", relation: "שלבים קוגניטיביים", word3: "Prepare", options: ["Succeed", "Forget", "Injured", "Substitute"], correct: "Succeed" }
 ];
 
 // ── השלמת משפטים ──────────────────────────────────────────────────
@@ -134,7 +141,14 @@ const completionData = [
   { sentence: "He was very nervous before the league game; _______, he scored a hat-trick.", options: ["However", "Therefore", "Since", "Because"], correct: "However" },
   { sentence: "To become a professional player, you must _______ on your football practice every single day.", options: ["Focus", "Escape", "Forgive", "Understand"], correct: "Focus" },
   { sentence: "The referee blew his _______ and pointed to the penalty spot.", options: ["Whistle", "Shield", "Trophy", "Midfielder"], correct: "Whistle" },
-  { sentence: "He made a serious _______ and passed the ball directly to the opponent striker.", options: ["Mistake", "Victory", "Patience", "Decision"], correct: "Mistake" }
+  { sentence: "He made a serious _______ and passed the ball directly to the opponent striker.", options: ["Mistake", "Victory", "Patience", "Decision"], correct: "Mistake" },
+  // 6 שאלות אתגר חדשות
+  { sentence: "Although the team prepared a brilliant _______, they failed to succeed because their star striker was injured.", options: ["Strategy", "Trophy", "Offside", "Enemy"], correct: "Strategy" },
+  { sentence: "The goalkeeper felt highly _______ after making three consecutive penalty saves in the tournament.", options: ["Confident", "Injured", "Dangerous", "Impossible"], correct: "Confident" },
+  { sentence: "Unless the defenders learn to support each other, preventing the opponent from scoring will be _______.", options: ["Impossible", "Serious", "Powerful", "Usually"], correct: "Impossible" },
+  { sentence: "Mr. Carter wanted to _______ the history of the legendary stadium since it was built in 1920.", options: ["Investigate", "Forgive", "Volunteer", "Escape"], correct: "Investigate" },
+  { sentence: "He made a _______ mistake during the league match; consequently, the coach replaced him with a substitute.", options: ["Serious", "Unexpected", "Competitive", "Confident"], correct: "Serious" },
+  { sentence: "The referee blew his whistle to _______ the players from fighting on the pitch.", options: ["Prevent", "Develop", "Imagine", "Choose"], correct: "Prevent" }
 ];
 
 // ── משחק חצאי משפטים (Half Sentences) ────────────────────────────────
@@ -213,82 +227,150 @@ const readingPatternsData = [
 // ── טקסטים לקריאה + שאלות (Football & Gaming Crossovers) ─────────────────
 const readingData = [
   {
-    title: "The Championship League Match",
-    text: `Yuval was the key [[midfielder|קשר|מִידְפִילְדֶר]] for his school team. Today was the final game of the [[tournament|טורניר / אליפות|טוּרְנָמֶנְט]]. The match was held in a massive [[stadium|אצטדיון|סְטֵיידְיוּם]] with a loud [[crowd|קהל צופים|קְרָאוּד]] of spectators.
+    title: "The Captain's Tactical Decision",
+    text: `Yuval, the school team's most [[competitive|תחרותי|קומפטיטיב]] [[midfielder|קשר|מִידְפִילְדֶר]], knew that winning this [[league|ליגה|לִיג]] [[tournament|טורניר / אליפות|טוּרְנָמֶנְט]] would require a perfect [[strategy|אסטרטגיה|סְטְרָטֶגִ'י]]. Today was the final match, and the team faced their toughest [[opponent|יריב|אופוננט]] in the city [[stadium|אצטדיון|סְטֵיידְיוּם]].
     
-    The coach told them that they needed a solid [[strategy|אסטרטגיה|סְטְרָטֶגִ'י]] to defeat their opponents. "We must [[focus|להתרכז|פוקוס]] on teamwork," the coach said. Yuval ran down the [[pitch|מגרש כדורגל|פִיץ']] and passed the ball to the [[striker|חלוץ|סְטְרַיְקֶר]], who scored a brilliant goal!
+    [[Although|למרות ש...|אוֹלְדּוֹאוּ]] Yuval was [[confident|בטוח בעצמו|קונפידנט]], things quickly went wrong. In the first half, their star [[striker|חלוץ|סְטְרַיְקֶר]] became [[injured|פצוע|אִינְג'וּרְד]] after a hard collision on the [[pitch|מגרש כדורגל|פִיץ']]. The [[coach|מאמן|קוֹאוּץ']] had to send in a [[substitute|שחקן מחליף|סַבְסְטִיטְיוּט]] who had very little [[experience|ניסיון / חוויה|איקספיריאנס]]. [[Consequently|כתוצאה מכך|קונסקוונטלי]], the team lost their offensive focus.
     
-    Suddenly, the [[referee|שופט משחק|רֶפְרִי]] blew his [[whistle|משרוקית / לשרוק|וּוִיסֶל]] for a penalty. The opponent tried to score, but our [[goalkeeper|שוער|גוֹלְקִיפֶר]] made a heroic save. We won the game and lifted the golden [[trophy|גביע|טְרוֹפִי]]! It was a legendary [[victory|ניצחון|וִקְטוֹרִי]].`,
+    During a critical moment, the [[opponent|יריב|אופוננט]] scored a goal, but the [[referee|שופט משחק|רֶפְרִי]] blew his [[whistle|משרוקית / לשרוק|וּוִיסֶל]] and declared it was an [[offside|נבדל|אוֹפְסַיְד]] play. The opponent coach argued loudly. Yuval realized they had to [[defend|להגן|דִּיפֶנְד]] their position. He whispered to the [[goalkeeper|שוער|גוֹלְקִיפֶר]]: "We must stay focused [[unless|אלא אם כן|אנלס]] we want to lose this golden [[trophy|גביע|טְרוֹפִי]]."
+    
+    With great [[effort|מאמץ|אפורט]] and tactical [[patience|סבלנות|פיישנס]], Yuval's teammates defended their goal until the final second, achieving a glorious [[victory|ניצחון|וִקְטוֹרִי]].`,
     questions: [
       {
-        q: "What was Yuval's role on the team?",
-        options: ["Striker", "Midfielder", "Goalkeeper", "Coach"],
+        q: "Why did the coach have to use a substitute?",
+        options: ["The goalkeeper made a mistake", "The referee got lost", "The star striker was injured", "The crowd was too loud"],
+        correct: 2
+      },
+      {
+        q: "Why did the opponent's goal not count?",
+        options: ["The striker was offside", "The goalkeeper caught it", "The game was over", "The coach stopped it"],
+        correct: 0
+      },
+      {
+        q: "What did Yuval tell the goalkeeper?",
+        options: ["To pass the ball immediately", "To stay focused unless they want to lose the trophy", "To let the substitute striker score", "To argue with the referee"],
         correct: 1
       },
       {
-        q: "What did the goalkeeper do?",
-        options: ["He got a yellow card", "He scored a goal", "He made a heroic save", "He blew his whistle"],
-        correct: 2
+        q: "Which position did Yuval play in the tournament?",
+        type: "text",
+        correctAnswers: ["midfielder", "key midfielder", "midfield"]
+      },
+      {
+        q: "Where did this final league tournament match take place?",
+        type: "text",
+        correctAnswers: ["stadium", "the stadium", "city stadium"]
       }
     ]
   },
   {
-    title: "A Serious Mistake on the Pitch",
-    text: `Daniel was a very [[competitive|תחרותי|קומפטיטיב]] player. In the middle of the game, he made an [[unexpected|בלתי צפוי|אניקספקטד]] decision. He stopped running and refused to [[support|לתמוך|סאפורט]] his [[teammate|שותף לקבוצה|טִים-מֵייט]].
+    title: "The Cyber Defense Simulation",
+    text: `Noah sat in his gaming chair, preparing for the most difficult [[level|רמה / שלב|לֶבֶל]] of the virtual [[challenge|אתגר|צ'אלנג']]. His [[mission|משימה|מִשֶׁן]] was simple: [[survive|לשרוד|סֶרְוַוייב]] the enemy wave and [[protect|להגן / לשמור|פרוטקט]] the final core. [[However|אולם / למרות זאת|הַאֶוֶור]], the computer [[opponent|יריב|אופוננט]] was incredibly [[powerful|עוצמתי / חזק|פַאוּוֶרְפוּל]].
     
-    Because of his selfish behavior, the opponent team easily passed our [[defender|שחקן הגנה|דִּיפֶנְדֶר]] and scored a goal. The coach called for a [[substitute|שחקן מחליף|סַבְסְטִיטְיוּט]] to replace Daniel immediately.
+    At the start, Noah wanted to [[build|לבנות|בִּילְד]] an active tower to [[attack|לתקוף|אֶטֶק]] and [[destroy|להרוס|דִּיסְטְרוֹי]] the enemy's front gate. [[Since|מאחר ש... / מאז|סינס]] the enemy had advanced [[weapons|נשק|וּוֶפּוֹן]], that initial plan failed. Noah had to [[escape|לברוח|אִסְקֵייפּ]] back to his base and quickly [[develop|לפתח|דיבלופ]] a secondary [[strategy|אסטרטגיה|סְטְרָטֶגִ'י]].
     
-    Daniel felt terrible and realized he made a [[serious|רציני|סיריוס]] [[mistake|טעות|מיסטייק]]. Later, the [[captain|קפטן|קַפְטֶן]] told him: "Respecting your team is the key to success. We cannot achieve [[victory|ניצחון|וִקְטוֹרִי]] without [[effort|מאמץ|אפורט]] from everyone." Daniel promised to improve his attitude and practice harder.`,
+    "I need to [[focus|להתרכז / מיקוד|פוקוס]] on my defensive [[shield|מגן|שִׁילְד]]," Noah [[realized|להבין / לקלוט|ריאלייז]]. He decided to support his [[teammates|שותף לקבוצה|טִים-מֵייט]] and coordinate their positions [[instead|במקום|אינסטד]] of fighting alone. [[Furthermore|יתרה מכך / בנוסף|פרדרמור]], he discovered a hidden chest containing a rare energy [[reward|פרס / גמול|ריוורד]].
+    
+    With patience, Noah and his team managed to [[prevent|למנוע|פריבנט]] the enemy from breaking their walls. [[Eventually|בסופו של דבר|איבנצ'ואלי]], they defeated the final boss. Noah's face lit up with joy; he had managed to [[succeed|להצליח|סאקסיד]] against all odds, proving that a smart defense is the best offense.`,
     questions: [
       {
-        q: "Why was Daniel replaced by a substitute?",
-        options: ["He was injured", "He refused to support his teammate", "He scored an own goal", "He forgot his shoes"],
+        q: "What was Noah's primary mission in the simulation?",
+        options: ["To destroy his own base", "To survive and protect the core", "To volunteer at the stadium", "To buy new gaming weapons"],
         correct: 1
       },
       {
-        q: "What did Daniel learn from the captain?",
-        options: ["Football is an individual sport", "Winning is impossible without luck", "Teamwork and respect are essential", "To practice goalkeeping"],
+        q: "Why did Noah's initial plan to attack the front gate fail?",
+        options: ["His teammate got injured", "He forgot his keyboard", "The enemy had advanced weapons", "The referee blew his whistle"],
         correct: 2
+      },
+      {
+        q: "What did Noah find in the hidden chest?",
+        options: ["A powerful substitute player", "A rare energy reward", "A football ticket", "A map of the stadium"],
+        correct: 1
+      },
+      {
+        q: "What did Noah decide to focus on instead of attacking the enemy?",
+        type: "text",
+        correctAnswers: ["defensive shield", "shield", "shields", "his shield", "defensive shields"]
+      },
+      {
+        q: "What did Noah's team manage to prevent the enemy from breaking?",
+        type: "text",
+        correctAnswers: ["walls", "the walls", "their walls"]
       }
     ]
   },
   {
-    title: "Maya's Phonics Practice",
-    text: `Maya loved to watch her brother Yuval [[practice|להתאמן / תרגול|פְּרַקְטִיס]] on the football field. She wanted to join the local girls' [[league|ליגה|לִיג]], but she was not [[confident|בטוח בעצמו|קונפידנט]] enough.
+    title: "The Scout's Investigation",
+    text: `Mr. Carter, a professional football scout, was visiting local high schools to [[investigate|לחקור|אינווסטיגייט]] new talent. His [[decision|החלטה|דיסיז'ן]] to attend the school [[league|ליגה|לִיג]] final was quick, [[since|מאחר ש... / מאז|סינס]] he heard about a highly skilled young [[striker|חלוץ|סְטְרַיְקֶר]].
     
-    "Every match is a [[challenge|אתגר|צ'אלנג']]," Yuval explained to her with [[patience|סבלנות|פיישנס]]. "You need to [[prepare|להתכונן|פריפר]] yourself, learn the rules, and understand that you will sometimes make a [[mistake|טעות|מיסטייק]]. The more you play, the more [[experience|ניסיון / חוויה|איקספיריאנס]] you gain."
+    As the game began, Mr. Carter watched the players closely. The young striker, Liam, was a very [[serious|רציני|סיריוס]] [[competitor|מתחרה|קומפטיטור]]. [[However|אולם / למרות זאת|הַאֶוֶור]], in the first few minutes, Liam made a terrible [[mistake|טעות|מיסטייק]] and missed a penalty shot. The crowd sighed, but Liam did not lose his [[focus|להתרכז / מיקוד|פוקוס]]. He ran back to help his [[defender|שחקן הגנה|דִּיפֶנְדֶר]] and [[encourage|לעודד|אינקארג']] his teammates.
     
-    Maya decided to try. In her first game, a defender was [[injured|פצוע|אִינְג'וּרְד]], and the coach sent Maya onto the field. She felt nervous, but she focused, intercepted a pass, and helped her team secure the win. She [[realized|להבין / לקלוט|ריאלייז]] that challenges are [[impossible|בלתי אפשרי|אימפוסיבל]] to overcome only if you don't try.`,
+    Mr. Carter was impressed. "Great players are not defined by their mistakes, but by their [[effort|מאמץ|אפורט]] to recover," he thought. Liam showed amazing [[patience|סבלנות|פיישנס]] and [[experience|ניסיון / חוויה|איקספיריאנס]] for an eighth-grader.
+    
+    In the second half, Liam got another chance. He bypassed two defenders, made a smart pass to his [[captain|קפטן|קַפְטֶן]], and then scored the winning goal himself. His hard work received a great [[reward|פרס / גמול|ריוורד]] when Mr. Carter offered him an invitation to train with the academy. Liam [[realized|להבין / לקלוט|ריאלייז]] that keeping his confidence was key.`,
     questions: [
       {
-        q: "Why was Maya hesitant to join the league?",
-        options: ["She did not like football", "She was not confident enough", "She had no time", "Her brother did not let her"],
+        q: "Why did Mr. Carter visit the school league match?",
+        options: ["To play as a substitute", "To investigate new talent", "To volunteer as a referee", "To build a new stadium"],
         correct: 1
       },
       {
-        q: "How did Maya get to play in her first match?",
-        options: ["She bought a ticket", "Her brother was the coach", "A defender was injured", "She won a lottery"],
-        correct: 2
+        q: "What mistake did Liam make at the beginning of the match?",
+        options: ["He got an offside card", "He missed a penalty shot", "He was injured", "He shouted at the coach"],
+        correct: 1
+      },
+      {
+        q: "How did Liam react after making the mistake?",
+        options: ["He sat on the bench", "He ran to help and encourage his team", "He cried on the pitch", "He decided to quit the league"],
+        correct: 1
+      },
+      {
+        q: "What did Liam miss at the start of the match?",
+        type: "text",
+        correctAnswers: ["penalty", "penalty shot", "a penalty", "a penalty shot"]
+      },
+      {
+        q: "Who did Liam pass the ball to before scoring the final goal?",
+        type: "text",
+        correctAnswers: ["captain", "the captain", "his captain"]
       }
     ]
   },
   {
-    title: "The Cyber Cup Challenge",
-    text: `Noah was a famous gamer, but today he faced a new [[challenge|אתגר|צ'אלנג']] — a virtual FIFA football tournament. His [[opponent|יריב|אופוננט]] was a [[powerful|עוצמתי / חזק|פַאוּוֶרְפוּל]] player who rarely made a [[mistake|טעות|מיסטייק]].
+    title: "Cooperating for Victory",
+    text: `Yuval and Noah were both highly skilled gamers. [[Usually|בדרך כלל|יוז'ואלי]], they played as [[opponents|יריב|אופוננט]] in local FIFA gaming matches. Today, [[however|אולם / למרות זאת|הַאֶוֶור]], they had to cooperate as [[teammates|שותף לקבוצה|טִים-מֵייט]] in the cyber double [[tournament|טורניר / אליפות|טוּרְנָמֶנְט]].
     
-    [[Although|למרות ש...|אוֹלְדּוֹאוּ]] Noah was skilled, his opponent got an [[advantage|יתרון|אדוונטג']] and scored early. Noah's virtual team was caught in an [[offside|נבדל|אוֹפְסַיְד]] trap, and the crowd in the digital [[stadium|אצטדיון|סְטֵיידְיוּם]] was cheering for his defeat.
+    [[Although|למרות ש...|אוֹלְדּוֹאוּ]] they were friends, their styles were very different. Yuval preferred an aggressive [[attack|לתקוף|אֶטֶק]] style, while Noah focused on how to [[defend|להגן|דִּיפֶנְד]] and [[protect|להגן / לשמור|פרוטקט]] their side. To [[succeed|להצליח|סאקסיד]], they had to merge their [[strategies|אסטרטגיה|סְטְרָטֶגִ'י]] and [[support|לתמוך|סאפורט]] each other's moves.
     
-    Noah stopped rushing and changed his [[strategy|אסטרטגיה|סְטְרָטֶגִ'י]]. He focused on defense and waited for a mistake. [[Eventually|בסופו של דבר|איבנצ'ואלי]], his opponent lost focus. Noah executed a perfect counter-attack, scored two goals, and achieved a dramatic [[victory|ניצחון|וִקְטוֹרִי]]. He smiled, realizing that both real-life football and gaming require mental [[effort|מאמץ|אפורט]] and focus.`,
+    Their final [[competitor|מתחרה|קומפטיטור]] was a legendary team of [[champions|אלוף|צ'ֶמְפִּיּוֹן]]. In the first game, Yuval rushed forward without waiting for Noah. [[Consequently|כתוצאה מכך|קונסקוונטלי]], their defense was broken, and they suffered a painful [[defeat|תבוסה / להביס|דיפיט]].
+    
+    "We must coordinate our positions, [[otherwise|אחרת / אם לא|אדרווייז]] we will lose the match," Noah warned. In the second game, Yuval played with more caution, passing the ball back to Noah when needed. Their combined [[effort|מאמץ|אפורט]] paid off. They scored twice and [[achieved|להשיג|אצ'יב]] a dramatic win, raising the virtual cup together.`,
     questions: [
       {
-        q: "What game was Noah playing in the tournament?",
-        options: ["Fortnite", "Virtual FIFA football", "Minecraft", "Chess"],
+        q: "How did Yuval and Noah usually play in local gaming matches?",
+        options: ["As teammates", "As opponents", "As referees", "As coaches"],
         correct: 1
       },
       {
-        q: "How did Noah win the match?",
-        options: ["He hacked the game", "He changed his strategy and focused", "His opponent was injured", "His coach helped him"],
-        correct: 1
+        q: "What was Yuval's preferred gaming style?",
+        options: ["An aggressive attack style", "A slow defensive strategy", "Watching from the stadium", "Volunteering as goalkeeper"],
+        correct: 0
+      },
+      {
+        q: "Why did they suffer a painful defeat in the first game?",
+        options: ["Noah got injured", "He broke his keyboard", "Yuval rushed forward without waiting for Noah", "They forgot the rules"],
+        correct: 2
+      },
+      {
+        q: "What did they have to merge and coordinate to succeed?",
+        type: "text",
+        correctAnswers: ["strategies", "strategy", "their strategies", "their strategy"]
+      },
+      {
+        q: "What did Yuval and Noah raise together at the end of the tournament?",
+        type: "text",
+        correctAnswers: ["cup", "the cup", "virtual cup", "the virtual cup", "trophy", "the trophy"]
       }
     ]
   }
@@ -538,7 +620,8 @@ export default function App() {
   const [analogyIndex, setAnalogyIndex] = useState(0);
   const [compIndex, setCompIndex] = useState(0);
   const [readingIndex, setReadingIndex] = useState(0);
-  const [readingAnswered, setReadingAnswered] = useState([null, null]);
+  const [readingAnswered, setReadingAnswered] = useState([]);
+  const [typedAnswers, setTypedAnswers] = useState(["", "", "", "", ""]);
   const [quizSet, setQuizSet] = useState([]);
   const [quizIndex, setQuizIndex] = useState(0);
   const [quizScore, setQuizScore] = useState(0);
@@ -860,7 +943,8 @@ export default function App() {
 
   const openReading = idx => {
     setReadingIndex(idx);
-    setReadingAnswered([null, null]);
+    setReadingAnswered(new Array(readingData[idx].questions.length).fill(null));
+    setTypedAnswers(new Array(readingData[idx].questions.length).fill(""));
     setView('reading');
     setCoachMsg("קטע קריאה מאתגר! העבר עכבר מעל המילים הצבועות כדי לראות תרגום והגייה. 📖");
   };
@@ -882,6 +966,35 @@ export default function App() {
       next[qIdx] = chosenIdx;
       return next;
     });
+  };
+
+  const handleReadingTextSubmit = (qIdx) => {
+    if (readingAnswered[qIdx] === 'correct') return;
+    const q = readingData[readingIndex].questions[qIdx];
+    const entered = (typedAnswers[qIdx] || "").toLowerCase().trim().replace(/[^a-z0-9\s]/g, '');
+    const isCorrect = q.correctAnswers.some(ans => {
+      const cleanAns = ans.toLowerCase().trim().replace(/[^a-z0-9\s]/g, '');
+      return cleanAns === entered;
+    });
+    
+    if (isCorrect) {
+      playSound('success');
+      triggerAnimation('success-check');
+      setCoachMsg(getCoachFeedback('success', "התשובה שהקלדת נכונה במדויק!"));
+      setReadingAnswered(prev => {
+        const next = [...prev];
+        next[qIdx] = 'correct';
+        return next;
+      });
+    } else {
+      playSound('error');
+      setCoachMsg(getCoachFeedback('error', "התשובה שהקלדת לא נכונה. תחשוב שוב ונסה פעם נוספת!"));
+      setReadingAnswered(prev => {
+        const next = [...prev];
+        next[qIdx] = 'incorrect';
+        return next;
+      });
+    }
   };
 
   // רינדור טקסט עם תמיכה ב-Tooltips פונטיים (מערכת שוהם)
@@ -1472,35 +1585,94 @@ export default function App() {
 
             {readingData[readingIndex].questions.map((q, qIdx) => (
               <div key={qIdx} className="bg-slate-900 border border-slate-750 rounded-2xl p-5 space-y-3">
-                <p className="font-extrabold text-sm text-slate-400">שאלה {qIdx + 1}:</p>
+                <p className="font-extrabold text-sm text-slate-405">שאלה {qIdx + 1}:</p>
                 <p className="font-black text-base text-slate-100" dir="ltr">{q.q}</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {q.options.map((opt, oIdx) => {
-                    const answered = readingAnswered[qIdx];
-                    let btnStyle = "w-full text-left p-3.5 rounded-xl font-bold text-sm border-2 transition-all ";
-                    
-                    if (answered === null) {
-                      btnStyle += "bg-slate-800 border-slate-700 text-slate-200 hover:bg-sky-955/40 hover:border-sky-500 cursor-pointer";
-                    } else if (oIdx === q.correct) {
-                      btnStyle += "bg-emerald-950/40 border-emerald-600 text-emerald-300 cursor-default";
-                    } else if (oIdx === answered) {
-                      btnStyle += "bg-red-950/40 border-red-600 text-red-300 cursor-default";
-                    } else {
-                      btnStyle += "bg-slate-800 border-slate-700 text-slate-500 opacity-40 cursor-default";
-                    }
-
-                    return (
-                      <button key={oIdx} onClick={() => handleReadingAnswer(qIdx, oIdx)}
-                        disabled={answered !== null} className={btnStyle} dir="ltr">
-                        {opt}
+                
+                {q.type === 'text' ? (
+                  /* שאלת הקלדה פתוחה */
+                  <div className="space-y-3">
+                    <div className="flex gap-2">
+                      <input 
+                        type="text" 
+                        placeholder="הקלד מילה אחת או שתיים באנגלית..."
+                        value={typedAnswers[qIdx] || ""}
+                        onChange={e => {
+                          const next = [...typedAnswers];
+                          next[qIdx] = e.target.value;
+                          setTypedAnswers(next);
+                        }}
+                        disabled={readingAnswered[qIdx] === 'correct'}
+                        className="flex-1 bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-sky-500 transition-all text-left font-bold"
+                        dir="ltr"
+                      />
+                      <button
+                        onClick={() => handleReadingTextSubmit(qIdx)}
+                        disabled={readingAnswered[qIdx] === 'correct' || !(typedAnswers[qIdx] || "").trim()}
+                        className="px-5 py-2.5 bg-sky-600 hover:bg-sky-500 disabled:bg-slate-850 disabled:text-slate-500 text-white font-extrabold rounded-xl transition-all"
+                      >
+                        בדיקה ⚽
                       </button>
-                    );
-                  })}
-                </div>
-                {readingAnswered[qIdx] !== null && (
-                  <p className={`font-bold text-xs ${readingAnswered[qIdx] === q.correct ? 'text-emerald-400' : 'text-red-400'}`}>
-                    {readingAnswered[qIdx] === q.correct ? '✓ תשובה נכונה, גול יפה!' : `✗ החמצה! התשובה הנכונה: ${q.options[q.correct]}`}
-                  </p>
+                    </div>
+                    {readingAnswered[qIdx] === 'correct' && (
+                      <p className="font-bold text-xs text-emerald-400">
+                        ✓ תשובה נכונה, ביצוע מושלם! (הקלדת: "{typedAnswers[qIdx]}")
+                      </p>
+                    )}
+                    {readingAnswered[qIdx] === 'incorrect' && (
+                      <div className="flex items-center justify-between bg-red-955/20 border border-red-900/30 p-2.5 rounded-xl">
+                        <p className="font-bold text-xs text-red-400">
+                          ✗ החמצה! התשובה לא מדויקת. נסה שוב!
+                        </p>
+                        <button 
+                          onClick={() => {
+                            setReadingAnswered(prev => {
+                              const next = [...prev];
+                              next[qIdx] = null;
+                              return next;
+                            });
+                            const nextTyped = [...typedAnswers];
+                            nextTyped[qIdx] = "";
+                            setTypedAnswers(nextTyped);
+                          }}
+                          className="text-xs bg-slate-800 hover:bg-slate-700 border border-slate-700 text-sky-300 px-3 py-1 rounded-lg font-bold"
+                        >
+                          נסה שוב 🔄
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  /* שאלת בחירה מרובה */
+                  <>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {q.options.map((opt, oIdx) => {
+                        const answered = readingAnswered[qIdx];
+                        let btnStyle = "w-full text-left p-3.5 rounded-xl font-bold text-sm border-2 transition-all ";
+                        
+                        if (answered === null) {
+                          btnStyle += "bg-slate-800 border-slate-700 text-slate-205 hover:bg-sky-955/40 hover:border-sky-500 cursor-pointer";
+                        } else if (oIdx === q.correct) {
+                          btnStyle += "bg-emerald-950/40 border-emerald-600 text-emerald-300 cursor-default";
+                        } else if (oIdx === answered) {
+                          btnStyle += "bg-red-950/40 border-red-600 text-red-300 cursor-default";
+                        } else {
+                          btnStyle += "bg-slate-800 border-slate-700 text-slate-500 opacity-40 cursor-default";
+                        }
+
+                        return (
+                          <button key={oIdx} onClick={() => handleReadingAnswer(qIdx, oIdx)}
+                            disabled={answered !== null} className={btnStyle} dir="ltr">
+                            {opt}
+                          </button>
+                        );
+                      })}
+                    </div>
+                    {readingAnswered[qIdx] !== null && (
+                      <p className={`font-bold text-xs ${readingAnswered[qIdx] === q.correct ? 'text-emerald-400' : 'text-red-400'}`}>
+                        {readingAnswered[qIdx] === q.correct ? '✓ תשובה נכונה, גול יפה!' : `✗ החמצה! התשובה הנכונה: ${q.options[q.correct]}`}
+                      </p>
+                    )}
+                  </>
                 )}
               </div>
             ))}
