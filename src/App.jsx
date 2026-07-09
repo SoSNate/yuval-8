@@ -529,6 +529,15 @@ export default function App() {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
   const [isPwaInstalled, setIsPwaInstalled] = useState(false);
 
+  // תזכורות PWA יומיות
+  const [remindersEnabled, setRemindersEnabled] = useState(() => {
+    return localStorage.getItem('yuval_reminders_enabled') === 'true';
+  });
+  const [reminderTime, setReminderTime] = useState(() => {
+    return localStorage.getItem('yuval_reminder_time') || '16:00';
+  });
+  const [showReminderSettings, setShowReminderSettings] = useState(false);
+
   useEffect(() => {
     const handleBeforeInstall = (e) => {
       e.preventDefault();
@@ -997,6 +1006,95 @@ export default function App() {
     }
   };
 
+  const updateReminderNotification = async (enabled, time) => {
+    localStorage.setItem('yuval_reminders_enabled', enabled ? 'true' : 'false');
+    localStorage.setItem('yuval_reminder_time', time);
+
+    if (!enabled) {
+      if ('serviceWorker' in navigator && 'Notification' in window) {
+        const registration = await navigator.serviceWorker.ready;
+        if (registration.getNotifications) {
+          const notifications = await registration.getNotifications();
+          notifications.forEach(notif => {
+            if (notif.tag === 'yuval-daily-reminder') {
+              notif.close();
+            }
+          });
+        }
+      }
+      setCoachMsg("🧔 התזכורות בוטלו. תוכל להפעיל אותן מחדש בכל עת!");
+      return;
+    }
+
+    if (!('Notification' in window)) {
+      setCoachMsg("🧔 הדפדפן שלך לא תומך בהתראות מקומיות.");
+      return;
+    }
+
+    if (Notification.permission !== 'granted') {
+      const permission = await Notification.requestPermission();
+      if (permission !== 'granted') {
+        setCoachMsg("🧔 לא אישרת התראות, לא נוכל לשלוח לך תזכורות.");
+        setRemindersEnabled(false);
+        localStorage.setItem('yuval_reminders_enabled', 'false');
+        return;
+      }
+    }
+
+    if ('serviceWorker' in navigator) {
+      const registration = await navigator.serviceWorker.ready;
+      
+      if (registration.getNotifications) {
+        const notifications = await registration.getNotifications();
+        notifications.forEach(notif => {
+          if (notif.tag === 'yuval-daily-reminder') {
+            notif.close();
+          }
+        });
+      }
+
+      const [hours, minutes] = time.split(':').map(Number);
+      const now = new Date();
+      const target = new Date();
+      target.setHours(hours, minutes, 0, 0);
+      if (target <= now) {
+        target.setDate(target.getDate() + 1);
+      }
+
+      const hasTimestampTrigger = 'showTrigger' in Notification.prototype || 'TimestampTrigger' in window;
+      if (hasTimestampTrigger) {
+        try {
+          const trigger = new TimestampTrigger(target.getTime());
+          await registration.showNotification("זמן אנגלית! ⚽", {
+            body: "היי יובל, הגיע הזמן לתרגל אנגלית יומית ולזכות בגביע!",
+            icon: "./icon-192.png",
+            badge: "./icon-192.png",
+            tag: 'yuval-daily-reminder',
+            showTrigger: trigger
+          });
+          setCoachMsg(`🧔 מעולה! הגדרנו לך תזכורת יומית לשעה ${time}.`);
+          return;
+        } catch (e) {
+          console.warn("TimestampTrigger error:", e);
+        }
+      }
+
+      registration.showNotification("התראות הופעלו! 🔔", {
+        body: `נזכיר לך בכל יום בשעה ${time} כשאתה מתרגל!`,
+        icon: "./icon-192.png",
+        badge: "./icon-192.png",
+        tag: 'yuval-daily-reminder-init',
+      });
+      setCoachMsg(`🧔 תזכורות הופעלו! ננסה להזכיר לך בשעה ${time}.`);
+    }
+  };
+
+  useEffect(() => {
+    if (remindersEnabled) {
+      updateReminderNotification(true, reminderTime);
+    }
+  }, []);
+
   // רינדור טקסט עם תמיכה ב-Tooltips פונטיים (מערכת שוהם)
   const renderStoryText = text => {
     if (!text) return null;
@@ -1072,12 +1170,75 @@ export default function App() {
                 📱 התקן אפליקציה במסך הבית
               </button>
             )}
+            {/* כפתור הגדרת תזכורת */}
+            <button onClick={() => setShowReminderSettings(prev => !prev)} className="text-xs bg-slate-700 hover:bg-slate-600 border border-slate-650 text-indigo-300 px-4 py-2.5 rounded-xl font-bold shadow-md transition-all active:scale-95 flex items-center gap-1">
+              <span>🔔</span> תזכורת יומית
+            </button>
             {/* כפתור איפוס התקדמות */}
-            <button onClick={resetProgress} className="text-xs bg-slate-700 hover:bg-slate-600 border border-slate-650 text-sky-300 px-4 py-2 rounded-xl font-bold shadow-md transition-all active:scale-95">
+            <button onClick={resetProgress} className="text-xs bg-slate-700 hover:bg-slate-600 border border-slate-650 text-sky-300 px-4 py-2.5 rounded-xl font-bold shadow-md transition-all active:scale-95">
               איפוס התקדמות 🔄
             </button>
           </div>
         </header>
+
+        {/* 🔔 הגדרת תזכורת יומית */}
+        {showReminderSettings && (
+          <div className="bg-slate-800 border border-indigo-950 rounded-3xl p-5 shadow-xl space-y-4 animate-fadeIn">
+            <div className="flex justify-between items-center">
+              <h3 className="text-lg font-black text-indigo-400 flex items-center gap-1.5">
+                <span>🔔</span> הגדרת תזכורת אימון יומית
+              </h3>
+              <button 
+                onClick={() => setShowReminderSettings(false)}
+                className="text-slate-400 hover:text-slate-200 text-sm font-bold bg-slate-900/60 w-8 h-8 rounded-full flex items-center justify-center transition-all"
+              >
+                ✕
+              </button>
+            </div>
+
+            <p className="text-xs text-slate-300">
+              נשלח לך תזכורת יומית לטלפון כדי להזכיר לך להיכנס ולתרגל אנגלית! תוכל לשנות או לכבות את התזכורת בכל עת.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-4 bg-slate-900 p-4 rounded-2xl border border-slate-750">
+              <label className="flex items-center gap-2 cursor-pointer select-none">
+                <input 
+                  type="checkbox" 
+                  checked={remindersEnabled}
+                  onChange={(e) => {
+                    const enabled = e.target.checked;
+                    setRemindersEnabled(enabled);
+                    updateReminderNotification(enabled, reminderTime);
+                  }}
+                  className="w-5 h-5 rounded border-slate-700 text-indigo-650 bg-slate-800 focus:ring-indigo-500 focus:ring-offset-slate-900"
+                />
+                <span className="font-extrabold text-sm text-slate-200">אפשר תזכורות יומיות</span>
+              </label>
+
+              {remindersEnabled && (
+                <div className="flex items-center gap-2">
+                  <span className="text-xs text-slate-400 font-bold">בשעה:</span>
+                  <input 
+                    type="time" 
+                    value={reminderTime}
+                    onChange={(e) => {
+                      const time = e.target.value;
+                      setReminderTime(time);
+                      updateReminderNotification(true, time);
+                    }}
+                    className="bg-slate-800 border border-slate-700 rounded-xl px-3 py-1.5 text-slate-100 font-black focus:outline-none focus:border-indigo-500 transition-all text-center text-sm"
+                  />
+                </div>
+              )}
+            </div>
+
+            {remindersEnabled && (
+              <p className="text-[11px] text-emerald-400 font-bold">
+                ✓ התראות מופעלות! נשלח לך תזכורת בכל יום בשעה {reminderTime}.
+              </p>
+            )}
+          </div>
+        )}
 
         {/* ⏱️ פס התקדמות וטיימר יומי של 10 דקות */}
         <div className="bg-slate-800 border border-slate-700 rounded-3xl p-5 shadow-xl space-y-3">
